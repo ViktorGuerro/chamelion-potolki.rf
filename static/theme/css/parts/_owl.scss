@@ -1,0 +1,93 @@
+.owl-scroller {
+	@extend .pos-rel;
+	
+	&.owl-scroller_classic-nav {
+		.owl-scroller-control {
+			@extend .pos-stat;
+			
+			.owl-scroller-nav {
+				@extend .pos-abs;
+				top: 50%;
+				z-index: 2;
+				margin: -23px 0 0;
+
+				&.owl-scroller-prev {
+					left: 0;
+				}
+
+				&.owl-scroller-next {
+					right: 0;
+				}
+			}
+		}
+	}
+}
+
+.owl-scroller-slides {
+	@extend .overflow-hidden;
+}
+
+.owl-scroller-control {
+	@include media-breakpoint-up(lg) {
+		position: absolute;
+		left: -115px;
+		bottom: 25px;
+	}
+}
+
+.owl-scroller-nav {
+	@extend .align-top;
+	@extend .d-inline-block;
+	@extend .cursor-pointer;
+	@include size(42px,45px);
+	background: #eae8e8;
+	
+	@include media-breakpoint-up(lg) {
+		position: relative;
+	}
+	
+	@include media-breakpoint-down(md) {
+		position: absolute;
+		top: 25%;
+		z-index: 2;
+		margin: -23px 0 0;
+	}
+	
+	&:before {
+		@extend .no-c;
+		@extend .pos-abs;
+		@include size(10px,30px);
+		top: 50%;
+		margin: -15px 0 0;
+		background-size: 100% auto;
+		background-repeat: no-repeat;
+	}
+	
+	&.owl-scroller-prev {
+		border-radius: 20px 0 0 20px;
+		
+		@include media-breakpoint-down(md) {
+			left: 0;
+		}
+		
+		&:before {
+			left: 10px;
+			background-position: left center;
+			background-image: url(../img/icons/icon-arrow-left.png);
+		}
+	}
+	
+	&.owl-scroller-next {
+		border-radius: 0 20px 20px 0;
+		
+		@include media-breakpoint-down(md) {
+			right: 0;
+		}
+		
+		&:before {
+			right: 10px;
+			background-position: right center;
+			background-image: url(../img/icons/icon-arrow-right.png);
+		}
+	}
+}

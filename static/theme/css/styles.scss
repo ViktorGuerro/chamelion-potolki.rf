@@ -1,0 +1,28 @@
+@import "../../libs/bootstrap/css/bootstrap.scss";
+
+@import "vars/text";
+@import "vars/colors";
+@import "vars/default";
+
+@import "mixins/mixins";
+
+@import "parts/fonts";
+@import "parts/btn";
+@import "parts/main";
+@import "parts/form";
+//@import "parts/owl";
+@import "parts/modal";
+//@import "parts/selecter";
+//@import "parts/pagination";
+
+@import "template/header";
+@import "template/features";
+@import "template/card";
+@import "template/section";
+@import "template/infoblock";
+@import "template/content";
+@import "template/projects";
+@import "template/members";
+@import "template/example";
+@import "template/proposition";
+@import "template/footer";

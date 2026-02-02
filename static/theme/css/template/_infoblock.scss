@@ -1,0 +1,239 @@
+.infoblock {
+	min-height: 270px;
+	padding: 45px 25px 25px;
+	background: $white;
+	border: 3px solid #c3d7f1;
+	border-radius: 7px;
+	box-shadow: 1px 1px 7px rgba(0,0,0,0.15);
+	
+	&.infoblock_bg {
+		@include media-breakpoint-up(md) {
+			padding-bottom: 58px;
+		}
+
+		@include media-breakpoint-down(sm) {
+			padding-bottom: 25px;
+		}
+
+		@include media-breakpoint-down(xsm) {
+			padding-right: 15px;
+			
+			margin-left: -15px;			
+			border-left: 0;
+			border-radius: 0 7px 7px 0;
+		}
+	
+		&.infoblock_bg-card {
+			background: url(../img/infoblock_card.svg) no-repeat scroll 0 0 rgba(0,0,0,0);
+
+			@include media-breakpoint-up(sm) {
+				padding-left: 150px;
+				padding-right: 45px;
+			}
+			
+			@include media-breakpoint-down(xsm) {
+				padding-left: 85px;
+			}
+		}
+
+		&.infoblock_bg-piggybank {
+			background: url(../img/infoblock_piggybank.png) no-repeat scroll -65px 30px rgba(0,0,0,0);
+
+			@include media-breakpoint-up(xl) {
+				padding-right: 35px;
+
+				.infoblock__title {
+					margin-bottom: 45px;
+				}
+			}
+
+			@include media-breakpoint-only(lg) {
+				padding-right: 20px;
+			}
+
+			@include media-breakpoint-only(md) {
+				padding-right: 35px;
+
+				.infoblock__title {
+					margin-bottom: 45px;
+				}
+			}
+
+			@include media-breakpoint-up(md) {
+				padding-left: 200px;
+			}
+
+			@include media-breakpoint-up(sm) {
+				background-size: auto 80%;
+			}
+
+			@include media-breakpoint-down(sm) {
+				padding-left: 160px;
+			}
+
+			@include media-breakpoint-only(xsm) {
+				background-size: 80% auto;
+			}
+		}
+	}
+	
+	&.infoblock_md-noborder {
+		@extend .pos-rel;
+
+		@include media-breakpoint-down(md) {
+			border: 0;
+			padding: 0;
+			box-shadow: none;
+			
+			.infoblock__content {
+				padding: 30px 30px 20px;
+			}
+		}
+
+		&.active {
+			.infoblock__content {
+				@extend .d-block;
+			}
+		}
+	}
+}
+
+.infoblock__title {
+	@extend .section__title;
+	@extend .section__title.section__title_bold;
+	@extend .d-inline-block;
+	@extend .align-top;
+	margin: 0 0 65px;
+
+	@include media-breakpoint-up(xl) {
+		font-size: 0.85*$font-size__md;
+	}
+
+	@include media-breakpoint-only(lg) {
+		font-size: $font-size__default;
+	}
+
+	@include media-breakpoint-only(md) {
+		font-size: $font-size__md;
+	}
+
+	@include media-breakpoint-only(xs) {
+		font-size: 14px;
+	}
+}
+
+.infoblock__subtitle {
+	@extend .text-uppercase;
+	@extend .font-weight-bold;
+	margin: 0 0 25px;
+	color: #173458;
+	letter-spacing: 0.05em;
+
+	@include media-breakpoint-down(xsm) {
+		font-size: 14px;
+	}
+}
+
+.infoblock__content {
+	@extend .d-none;
+
+	@include media-breakpoint-up(lg) {
+		position: relative;
+	}
+
+	@include media-breakpoint-down(md) {
+		position: absolute;
+		top: -155px;
+		left: 0;
+		right: 0;
+		z-index: 2;
+		background: $white;
+		border-radius: 7px;
+		border: 3px solid #c3d7f1;
+		box-shadow: 1px 1px 7px rgba(0,0,0,0.15);
+	}
+	
+	&:before {
+		@extend .no-c;
+		@extend .pos-abs;
+		@extend .d-none;
+		@extend .d-lg-block;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		width: 1px;
+		background: #c3d7f1;
+	}
+
+	p {
+		@extend .content__text;
+	}
+}
+
+.infoblock__feature {
+	letter-spacing: 0.05em;
+	color: #f8961d;
+
+	.font-weight-bold {
+		margin-bottom: -6px
+	}
+
+	@include media-breakpoint-up(xl) {
+		font-size: $font-size__md;
+	
+		.font-weight-bold {
+			font-size: 3*$font-size__md;
+		}
+	}
+
+	@include media-breakpoint-only(lg) {
+		font-size: $font-size__default;
+	
+		.font-weight-bold {
+			font-size: 3*$font-size__default;
+		}
+	}
+
+	@include media-breakpoint-down(md) {
+		font-size: $font-size__md;
+	
+		.font-weight-bold {
+			font-size: 3*$font-size__md;
+		}
+	}
+}
+
+.infoblock__icon {
+	@extend .d-inline-block;
+	@extend .align-middle;
+	height: 45px;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	background-color: rgba(0,0,0,0);
+	background-position: center center;
+
+	@include media-breakpoint-up(xl) {
+		width: 105px;
+	}
+
+	@include media-breakpoint-only(lg) {
+		width: 75px;
+	}
+
+	@include media-breakpoint-down(md) {
+		width: 105px;
+	}
+	
+	&.infoblock__icon_visa {
+		background-image: url(../img/logo/visa-logo.svg);
+	}
+	
+	&.infoblock__icon_mcard {
+		background-size: 65% auto;
+		background-image: url(../img/logo/mcard-logo.svg);
+	}
+	
+	&.infoblock__icon_mir {
+		background-image: url(../img/logo/mir-logo.svg);
+	}
+}

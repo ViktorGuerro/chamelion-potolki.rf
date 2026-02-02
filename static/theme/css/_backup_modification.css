@@ -1,0 +1,115 @@
+h3 {
+    font-size: 1.3rem;
+    color: #173458;
+}
+.content li, .content p, .content__list-item, .content__text, .infoblock__content p {
+    font-weight: 500;
+    font-size: 16px;
+}
+.bg-fixed {
+    background: none;
+}
+.header.affix {
+    background: rgba(255, 255, 255, 0.9);
+    padding-top: 10px;
+}
+.section-top {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+.section-top em {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: url(../img/bg.jpg) center/cover;
+    z-index: -1
+}
+.header__item a {
+    margin-right: 10px
+}
+.header__item p {
+    font-weight: 700;
+    color: #fff;
+}
+.affix .header__item p {
+    color: #000;
+}
+.partner-icon {
+    padding: 60px 0;
+}
+.partner-icon img {
+    transition: all .3s ease;
+    opacity: 0.6;
+    width: 120px;
+    transition: all .3s ease;
+}
+.partner-icon img:hover {
+    opacity: 1;
+ 
+}
+.link__for__parter__block {
+    position: absolute;
+    right: -50px;
+    bottom: 15%;
+    transform: rotate(90deg);
+    opacity: 0.9;
+    transition: all .3s ease;
+}
+.projects__item-title {
+    font-weight: 700;
+}
+.modal-policy {
+    text-decoration: underline;
+    font-size: 0.8rem;
+}
+.link__for__parter__block {
+    opacity: 1
+}
+.footer .numers, .footer .adres {
+    padding-left: 10px;
+}
+.footer .numers p, .footer .adres p {
+    font-weight: 700;
+}
+.politoca-block {
+  background: #f7f7f7;
+}
+@media (max-width: 1024px) and (min-width: 700px) {
+    .header__item p {
+        font-weight: 700;
+        color: #fff;
+        font-size: 0.7rem;
+    }
+}
+@media (max-width: 700px) and (min-width: 200px) {
+    .header {
+        padding: 5px 0;
+        background: rgba(255, 255, 255, 1);
+    }
+    .logo {
+        width: 100px;
+    }
+    .logo img {
+        width: 90px;
+    }
+    .header__item p {
+        display: none;
+    }
+    .header__item a img {
+        width: 15px;
+    }
+    .link__for__parter__block {
+        display: none;
+    }
+    .header.affix {
+        padding-top: 5px;
+    }
+    .btn.btn-header {
+        padding: 2px;
+        font-size: 0.6rem;
+    }
+}

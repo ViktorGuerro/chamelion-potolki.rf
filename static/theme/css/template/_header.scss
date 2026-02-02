@@ -1,0 +1,177 @@
+.header {
+	@extend .default-transition;
+	@include pos(fixed,0,0,auto,0);
+	z-index: 10;
+	padding: 15px 0 10px;
+	background: -moz-linear-gradient(top,  rgba(0,0,0,0.42) 0%, rgba(0,0,0,0) 100%);
+	background: -webkit-linear-gradient(top,  rgba(0,0,0,0.42) 0%,rgba(0,0,0,0) 100%);
+	background: linear-gradient(to bottom,  rgba(0,0,0,0.42) 0%,rgba(0,0,0,0) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6b000000', endColorstr='#00000000',GradientType=0 );
+	/*
+	&.header_hidden {
+		opacity: 0;
+	}
+	*/
+	&.affix {
+		padding-top: 10px;
+		//z-index: 1030;
+		background: rgba(255,255,255,0.7);
+
+		&.header_hidden {
+			opacity: 1;
+		}
+		
+		.header__logo {
+			box-shadow: none;
+			background-color: rgba(0,0,0,0);
+			background-position: center 15px;
+		}
+
+		.header__right {
+			@extend .align-items-center;
+			@extend .justify-content-lg-between;
+			@extend .justify-content-end;
+		}
+
+		.header__contacts {
+			@extend .pl-0;
+		}
+		
+		.header__contacts-item {
+			color: #173458;
+		}
+
+		.header__contacts-footer {
+			color: #173458;
+		}
+		
+		.header__company {
+			@extend .d-none;
+		}
+
+		.header__btn {
+			@extend .d-lg-inline-block;
+			@extend .align-top;
+		}
+		
+		& + .section_top {
+			@extend .bg-white;
+		}
+	}
+}
+
+.header__logo {
+	@extend .pos-rel;
+	@extend .d-inline-block;
+	@extend .align-top;
+	@extend .default-transition;
+	margin: -15px 0 0;
+	background: url(../img/logo-main.svg) no-repeat scroll center 8px $white;
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.25);
+	border-radius: 0 0 3px 3px;
+
+	@include media-breakpoint-up(lg) {
+		background-size: 76% auto;
+	}
+
+	@include media-breakpoint-down(md) {
+		background-size: 65% auto;
+	}
+	
+	@include media-breakpoint-up(sm) {
+		@include size(230px,80px);
+	}
+
+	@include media-breakpoint-down(xsm) {
+		height: 50px;
+	}
+
+	@include media-breakpoint-only(xsm) {
+		width: 165px;
+	}
+
+	@include media-breakpoint-only(xs) {
+		width: 100%;
+		margin-right: -15px;
+		background-position: center 12px;
+	}
+	
+	&:hover,
+	&:focus {
+		@extend .header__logo;
+	}
+}
+
+.header__right {
+	@extend .justify-content-between;
+}
+
+.header__contacts {
+	@extend .pl-xl-5;
+	@extend .d-none;
+	@extend .d-lg-inline-block;
+	@extend .align-top;
+	@extend .default-transition;
+}
+
+.header__contacts-list {
+	@extend .pos-rel;
+	padding: 0 0 0 55px;
+
+	&:before {
+		@extend .no-c;
+		@include pos-lt(0,50%);
+		@include size(36px,36px);
+		margin: -18px 0 0;
+		background: url(../img/icons/icon-phone.svg) no-repeat scroll center center #f8961d;
+		background-size: 80% auto;
+		border-radius: 3px;
+	}
+}
+
+.header__contacts-item {
+	@extend .mb-1;
+	@extend .d-block;
+	@extend .font-weight-bold;
+	@extend .default-transition;
+	color: $white;
+	
+	&:hover,
+	&:focus {
+		@extend .header__contacts-item;
+	}
+}
+
+.header__contacts-footer {
+	@extend .text-center;
+	@extend .dec-underline;
+	@extend .default-transition;
+	font-size: 13px;
+	letter-spacing: 0.05em;
+	color: $white;
+	
+	&:hover,
+	&:focus {
+		@extend .header__contacts-footer;
+	}
+}
+
+.header__company {
+	@extend .d-inline-block;
+	@extend .align-top;
+	margin: -15px 0 0;
+	background: url(../img/logo-company.svg) no-repeat scroll center center rgba(0,0,0,0);
+
+	@include media-breakpoint-up(sm) {
+		@include size(170px,95px);
+	}
+
+	@include media-breakpoint-down(xsm) {
+		@include size(105px,60px);
+		background-size: 100% auto;
+	}
+}
+
+.header__btn {
+	@extend .d-none;
+}

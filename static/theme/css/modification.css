@@ -1,0 +1,223 @@
+h3 {
+    font-size: 1.3rem;
+    color: #173458;
+}
+.content li, .content p, .content__list-item, .content__text, .infoblock__content p {
+    font-weight: 500;
+    font-size: 16px;
+}
+.bg-fixed {
+    background: none;
+}
+.header.affix {
+    background: rgba(255, 255, 255, 0.9);
+    padding-top: 10px;
+}
+.section-top {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 100vh;
+}
+.section-top em {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: url(../img/bg.jpg) center/cover;
+    z-index: -1
+}
+.header__item a {
+    /*margin-right: 10px*/
+    margin: 0px 10px;
+}
+.header__item p {
+    font-weight: 700;
+    color: #fff;
+}
+.affix .header__item p {
+    color: #000;
+}
+.partner-icon {
+    padding-left: 0rem!important;
+    justify-content: space-evenly!important;
+    padding: 30px 0;
+}
+.partner-icon img {
+    transition: all .3s ease;
+    opacity: 1;
+    width: 20%;
+    transition: all .3s ease;
+    height: 35%;
+}
+.partner-icon img:hover {
+    opacity: 1;
+}
+.link__for__parter__block {
+    width: 1px;
+    position: absolute;
+    right: 50px;
+    bottom: 1%;
+    /*transform: rotate(90deg);*/
+    opacity: 1;
+    transition: all .3s ease;
+}
+@keyframes glowing {
+    0% { box-shadow: 0 0 30px #074673; }
+    50% { box-shadow: 0 0 30px #0e87de; }
+    100% {box-shadow: 0 0 30px #094d7d; }
+}
+.projects__item-title {
+    font-weight: 700;
+}
+.modal-policy {
+    text-decoration: underline;
+    font-size: 0.8rem;
+}
+.footer .numers, .footer .adres {
+    padding-left: 10px;
+}
+.footer .numers p, .footer .adres p {
+    font-weight: 700;
+}
+.politoca-block {
+  background: #f7f7f7;
+}
+.btn.btn-header {
+    padding: unset;
+    margin: 0px 10px;
+}
+.btn.btn-header:hover {
+    padding: unset;
+    /*padding: 10px 0px;*/
+}
+.btn.btn-footer {
+    padding: 10px;
+    margin: auto;
+}
+.btn.btn-footer:hover {
+    padding: 10px;
+    margin: auto;
+}
+.shy {
+    display: none;
+}
+@media (max-width: 1024px) and (min-width: 700px) {
+    .header__item p {
+        font-weight: 700;
+        color: #fff;
+        font-size: 0.7rem;
+    }
+}
+@media (max-width: 700px) and (min-width: 200px) {
+    .header {
+        padding: 5px 0;
+        background: rgba(255, 255, 255, 1);
+    }
+    .logo {
+        width: 100px;
+    }
+    .logo img {
+        width: 100px;
+    }
+    .work_schedule {
+        display: contents!important;
+		text-align: center;
+        font-size: 9px;
+        font-weight: bold;
+        color: black!important;
+    }
+    .header__item p {
+        display: none;
+    }
+    .header__item a img {
+        width: 15px;
+    }
+    .link__for__parter__block {
+        display: none;
+    }
+    .header.affix {
+        padding-top: 5px;
+    }
+    .btn.btn-header {
+        padding: 2px;
+        font-size: 0.6rem;
+    }
+    .partner-icon img {
+        height: 20%;
+        width: 40%
+    }
+    .infoblock.infoblock_bg.infoblock_bg-piggybank {
+        padding: 20px;
+        margin-left: 0;
+        border-left: 3px solid #c3d7f1;
+    }
+}
+@media (max-width: 425px) {
+    .projects__item {
+        margin-bottom: 0rem!important;
+    }
+    .pay {
+        display: none;
+    }
+    .project-btn {
+        display: block!important;
+    }
+    .section-top {
+        height: 50vh;
+    }
+    .section-top em {
+        height: 50vh;
+    }
+    .h-100 {
+        height: 110%!important;
+    }
+    .shy {
+        display: inline;
+    }
+}
+@media (min-width: 375px) {
+    .header__block {
+        max-width: 400px;
+    }
+}
+@media (min-width: 768px) {
+    .header__block {
+        max-width: 768px;
+    }
+    .project-btn {
+        display: none!important;
+    }
+    .btn.btn-header {
+        padding: unset;
+    }
+    .btn.btn-footer {
+        padding: 10px;
+    }
+    .header__item a p {
+        display: none;
+    }
+}
+@media (min-width: 992px) {
+    .header__block {
+        max-width: 1000px;
+    }
+    .infoblock_bg-piggybank {
+        padding-top: 10px;
+        padding-bottom: 25px!important;
+    }
+    .number-font {
+        font-size: 45px!important;
+    }
+}
+@media (max-width: 1024px) {
+    .btn.btn-header {
+        /*padding: inherit;*/
+        margin: 0px 5px;
+    }
+    .btn.btn-footer {
+        padding: 10px;
+        margin: auto;
+    }
+}

@@ -1,0 +1,278 @@
+.bg-fixed {
+	@include media-breakpoint-up(md) {
+		background: url(../img/bg.jpg) no-repeat fixed center top rgba(0,0,0,0);
+	}
+
+	@include media-breakpoint-up(lg) {
+		background-size: 100% auto;
+	}
+
+	@include media-breakpoint-down(md) {
+		background-size: cover;
+	}
+}
+
+.section {
+	&.section_top {
+		@extend .d-block;
+		@extend .d-md-none;
+		@include pos(fixed,0,0,0,0);
+		z-index: -1;
+
+		@include media-breakpoint-down(sm) {
+			background: url(../img/bg.jpg) no-repeat scroll center top rgba(0,0,0,0);
+			background-size: cover;
+		}
+	}
+
+	&.section_fixed {
+		@extend .zi-2;
+		@extend .overflow-hidden;
+		height: 100vh;
+		
+		@include media-breakpoint-up(sm) {
+			padding: 150px 0 0;
+		}
+
+		@include media-breakpoint-down(xsm) {
+			padding: 100px 0 0;
+		}
+	}
+	
+	&.section_layer {
+		@extend .zi-none;
+		width: 100%;
+
+		@include media-breakpoint-up(lg) {
+			height: 1470px;
+		}
+
+		@include media-breakpoint-down(xsm) {
+			height: 735px;
+		}
+	}
+
+	&.section_colored {
+		@extend .pos-rel;
+		@extend .overflow-hidden;
+		min-height: 660px;
+		background: #543672;
+		background: -moz-linear-gradient(-45deg,  #543672 0%, #3e205c 100%);
+		background: -webkit-linear-gradient(-45deg,  #543672 0%,#3e205c 100%);
+		background: linear-gradient(135deg,  #543672 0%,#3e205c 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#543672', endColorstr='#3e205c',GradientType=1 );
+		//z-index: 11;
+
+		&:before {
+			@extend .no-c;
+			@include pos(absolute,0,30%,0,30%);
+			-o-transform: skew(-45deg);
+			-moz-transform: skew(-45deg);
+			-webkit-transform: skew(-45deg);
+			transform: skew(-45deg);
+			background: -moz-linear-gradient(top,  rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.05) 100%);
+			background: -webkit-linear-gradient(top,  rgba(255,255,255,0.01) 0%,rgba(255,255,255,0.05) 100%);
+			background: linear-gradient(to bottom,  rgba(255,255,255,0.01) 0%,rgba(255,255,255,0.05) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03ffffff', endColorstr='#0dffffff',GradientType=0 );
+			z-index: 1;
+		}
+/*
+		.content__list {
+			&.content__list_magic {
+				.content__list-item {
+					-o-transition: right 1s ease-out .1s;
+					-ms-transition: right 1s ease-out .1s;
+					-moz-transition: right 1s ease-out .1s;
+					-webkit-transition: right 1s ease-out .1s;
+					transition: right 1s ease-out .1s;
+					
+					&:first-child {
+						right: -5555px;
+					}
+					
+					&:nth-child(2) {
+						right: -7777px;
+					}
+					
+					&:nth-child(3) {
+						right: -9999px;
+					}
+					
+					&:nth-child(4) {
+						right: -12221px;
+					}
+					
+					&:nth-child(5) {
+						right: -14443px;
+					}
+				}
+
+				&.active {
+					.content__list-item {
+						right: 0;
+					}
+				}
+			}
+		}
+
+		.section__title {
+			&.section__title_magic {
+				-o-transition: left 1s ease-out .1s;
+				-ms-transition: left 1s ease .1s;
+				-moz-transition: left 1s ease-out .1s;
+				-webkit-transition: left 1s ease-out .1s;
+				transition: left 1s ease-out .1s;
+				left: -9999px;
+				
+				&.active {
+					left: 0;
+				}
+			}
+		}
+		
+		.section__footer {
+			&.section__footer_magic {
+				-o-transition: left 1s ease-out .1s;
+				-ms-transition: left 1s ease-out .1s;
+				-moz-transition: left 1s ease-out .1s;
+				-webkit-transition: left 1s ease-out .1s;
+				transition: left 1s ease-out .1s;
+				left: -9999px;
+				
+				&.active {
+					left: 0;
+				}
+			}
+		}
+*/		
+		.content__text {
+			color: $white;
+		}
+	}
+
+	&.section_light {
+		background: url(../img/section_light.jpg) no-repeat scroll center top rgba(0,0,0,0);
+
+		@include media-breakpoint-up(xl) {
+			background-size: 100% auto;
+		}
+			
+		@include media-breakpoint-down(lg) {
+			background-size: cover;
+		}
+	}
+
+	&.section_bg {
+		@extend .pos-rel;
+		@extend .overflow-hidden;
+		background: #2d4e8a;
+		background: -moz-linear-gradient(-45deg,  #2d4e8a 0%, #123574 100%);
+		background: -webkit-linear-gradient(-45deg,  #2d4e8a 0%,#123574 100%);
+		background: linear-gradient(135deg,  #2d4e8a 0%,#123574 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2d4e8a', endColorstr='#123574',GradientType=1 );
+
+		@include media-breakpoint-down(md) {
+			padding-bottom: 0 !important;
+		}
+		
+		&:after,
+		&:before {
+			@extend .no-c;
+			@extend .pos-abs;
+			top: 0;
+			bottom: 0;
+			z-index: 1;
+
+			@include media-breakpoint-up(lg) {
+				width: 50%;
+			}
+			
+			@include media-breakpoint-down(md) {
+				right: 0;
+			}
+		}
+
+		&:before {
+			width: 25%;
+			right: 65%;
+			-o-transform: skew(-45deg);
+			-moz-transform: skew(-45deg);
+			-webkit-transform: skew(-45deg);
+			transform: skew(-45deg);
+			background: -moz-linear-gradient(top,  rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.05) 100%);
+			background: -webkit-linear-gradient(top,  rgba(255,255,255,0.01) 0%,rgba(255,255,255,0.05) 100%);
+			background: linear-gradient(to bottom,  rgba(255,255,255,0.01) 0%,rgba(255,255,255,0.05) 100%);
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#03ffffff', endColorstr='#0dffffff',GradientType=0 );
+			z-index: 1;
+		}
+
+		&:after {
+			@extend .d-none;
+			@extend .d-lg-block;
+			right: 0;
+			background: url(../img/section_bg.jpg) no-repeat scroll center top rgba(0,0,0,0);
+			background-size: cover;
+		}
+
+		.section__title {
+			color: $white;
+		}
+
+		.content__text {
+			color: $white;
+		}
+		
+		.section__footer {
+			@extend .px-3;
+			@extend .pos-abs;
+			left: 0;
+			right: 0;
+			bottom: 50px;
+		}
+	}
+	
+	&.section_interior {
+		background: url(../img/section_interior.jpg) no-repeat scroll center center rgba(0,0,0,0);
+
+		@include media-breakpoint-up(xl) {
+			background-size: 100% auto;
+		}
+
+		@include media-breakpoint-down(lg) {
+			background-size: cover;
+		}
+	}
+	
+	h2 {
+		@extend .section__title;
+		@extend .section__title.section__title_bold;
+	}
+}
+
+.section__title {
+	@extend .text-center;
+	@extend .text-uppercase;
+	font-weight: 300;
+	color: $white;
+	letter-spacing: 0.05em;
+	line-height: $line-height__content;
+
+	@include media-breakpoint-up(md) {
+		font-size: 0.85*$font-size__md;
+	}
+	
+	&.section__title_bold {
+		@extend .d-inline;
+		@extend .font-weight-bold;
+		@include border(0 0 3px,solid,#c3d7f1);
+		color: #173458;
+
+		@include media-breakpoint-down(sm) {
+			font-size: $font-size__default;
+		}
+	}
+	
+	&.section__title_magic {
+		@extend .pos-rel;
+	}
+}

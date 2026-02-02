@@ -1,0 +1,41 @@
+body {
+	font: $font-size__default-md $font-family__default;
+	line-height: $line-height__default;
+	color: $font-color__default;
+}
+
+a {
+	@extend .dec-none;
+	@extend .outline-none;
+	color: $link-color__default;
+	
+	&:hover {
+		@extend .dec-none;
+		@extend .outline-none;
+		color: $link-color__hover;
+	}
+	
+	&:focus {
+		@extend .dec-none;
+		@extend .outline-none;
+		color: $link-color__default;
+	}
+}
+
+button,
+button:focus {
+	@extend .outline-none;
+}
+
+input,
+input:focus {
+	@extend .outline-none;
+}
+
+ul {
+	@extend .list-unstyled;
+}
+
+ol {
+	@extend .list-unstyled;
+}

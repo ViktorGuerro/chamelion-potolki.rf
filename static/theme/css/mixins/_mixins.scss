@@ -1,0 +1,63 @@
+@mixin fs-fw($fs,$fw) {
+	font-size: $fs;
+	font-weight: $fw;
+}
+
+@mixin fs-lh($fs,$lh) {
+	font-size: $fs;
+	line-height: $lh;
+}
+
+@mixin size($sw,$sh) {
+	width: $sw;
+	height: $sh;
+}
+
+@mixin offset($m,$p) {
+	margin: $m;
+	padding: $p;
+}
+
+@mixin border($bw,$bs,$bc) {
+	border-width: $bw;
+	border-style: $bs;
+	border-color: $bc;
+}
+
+@mixin pos-base {
+	@extend .pos-abs;
+	left: 0;
+	top: 0;
+}
+
+@mixin pos-lt($pl,$pt) {
+	@extend .pos-abs;
+	left: $pl;
+	top: $pt;
+}
+
+@mixin pos-alt($position,$posl,$post) {
+	position: $position;
+	left: $posl;
+	top: $post;
+}
+
+@mixin pos($pos,$top,$right,$bottom,$left) {
+	position: $pos;
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+
+@mixin prefixes($property, $value){
+	#{-webkit-}#{$property}: #{$value};
+	   #{-moz-}#{$property}: #{$value};
+	    #{-ms-}#{$property}: #{$value};
+	     #{-o-}#{$property}: #{$value};
+	           #{$property}: #{$value};
+}
+
+@mixin transition($value){
+	@include prefixes('transition', $value);
+}

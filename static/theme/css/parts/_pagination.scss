@@ -1,0 +1,38 @@
+.pagtination {
+}
+
+.pagtination__prev {
+}
+
+.pagtination__next {
+}
+
+.pagtination__item {
+	@extend .mr-2;
+	@extend .mb-2;
+	@extend .text-center;
+	@extend .align-top;
+	@extend .d-inline-block;
+	@include size(40px,36px);
+	padding: 5px;
+	border-radius: 3px;
+	line-height: 26px;
+	color: $white;
+	background: $btn-color__alert;
+	
+	&:hover,
+	&:focus {
+		@extend .pagtination__item;
+	}
+}
+
+.pagtination__current {
+	@extend .pagtination__item;
+	color: $black;
+	background: $btn-color__default;
+	
+	&:hover,
+	&:focus {
+		@extend .pagtination__current;
+	}
+}

@@ -1,0 +1,74 @@
+.fs-dropdown {
+	@extend .pos-rel;
+
+	&.fs-dropdown-open {
+		@extend .zi-3;
+		
+		.fs-dropdown-selected {
+			border-color: rgba(0,0,0,0) rgba(0,0,0,0) #999;
+			
+			&:before {
+				@include border(0 13px 12px 13px,solid,rgba(0,0,0,0) rgba(0,0,0,0) #999);
+			}
+		}
+		
+		.fs-dropdown-options {
+			@extend .d-block;
+		}
+	}
+}
+
+.fs-dropdown-selected {
+	@extend .pos-rel;
+	@extend .d-block;
+	@extend .text-left;
+	@extend .cursor-pointer;
+	@extend .overflow-hidden;
+	@include size(100%,36px);
+	@include border(1px,solid,rgba(0,0,0,0));
+	padding: 6px 40px 6px 11px;
+	color: #666;
+	background: $white;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	
+	&:before {
+		@extend .no-c;
+		@extend .pos-abs;
+		@include border(12px 13px 0 13px,solid,#999 rgba(0,0,0,0) rgba(0,0,0,0));
+		top: 11px;
+		right: 7px;
+	}
+}
+
+.fs-dropdown-options {
+	@extend .d-none;
+	@extend .pos-abs;
+	left: 0;
+	right: 0;
+	background: $white;
+}
+
+.fs-dropdown-item {
+	@extend .d-block;
+	@extend .text-left;
+	@extend .cursor-pointer;
+	@include size(100%,36px);
+	@include border(0 0 1px,solid,#bbcfda);
+	padding: 6px 11px;
+	font-size: $font-size__sm;
+	background: rgba(0,0,0,0);
+	
+	&.fs-dropdown-item_placeholder {
+		@extend .d-none;
+	}
+	
+	&.fs-dropdown-item_disabled {
+		@extend .d-none;
+	}
+	
+	&:hover,
+	&.fs-dropdown-item_selected {
+		background: #dfeaf0;
+	}
+}

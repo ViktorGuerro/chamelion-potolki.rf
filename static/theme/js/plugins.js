@@ -1,0 +1,8 @@
+// @koala-prepend "../../libs/classie.min.js"
+// @koala-prepend "../../libs/bootstrap/js/dist/util.js"
+// @koala-prepend "../../libs/bootstrap/js/dist/modal.js"
+// @koala-prepend "../../libs/bootstrap/js/dist/affix_custom.js"
+// @koala-prepend "../../libs/formstone-dropdown/core.js"
+// @koala-prepend "../../libs/formstone-dropdown/dropdown.js"
+// @koala-prepend "../../libs/formstone-dropdown/touch.js"
+// @koala-prepend "../../libs/jquery.maskedinput.min.js"

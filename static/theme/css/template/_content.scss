@@ -1,0 +1,121 @@
+.content {
+	p {
+		@extend .content__text;
+	}
+
+	li {
+		@extend .content__list-item;
+	}
+	
+	ul {
+		@extend .content__list;
+
+		li {
+			@extend .content__list-item.content__list-item_regular;
+		}
+	}
+	
+	ol {
+		@extend .content__list;
+		@extend .content__list.content__list_decimal;
+
+		li {
+			@extend .content__list-item.content__list-item_decimal;
+		}
+	}
+	
+	&.content_md {
+		p {
+			@extend .content__text.content__text_md;
+		}
+	}
+}
+
+.content__text {
+	color: #173458;
+	font-weight: 300;
+	letter-spacing: 0.05em;
+	line-height: $line-height__content;
+	font-size: $font-size__default-md;
+	
+	@include media-breakpoint-up(md) {
+		&.content__text_md {
+			//font-size: $font-size__md;
+			font-size: $font-size__default-md;
+		}
+	}
+	
+	@include media-breakpoint-only(sm) {
+		//font-size: $font-size__xmd;
+
+		&.content__text_md {
+			//font-size: $font-size__default;
+			font-size: $font-size__default-md;
+		}
+	}
+
+	@include media-breakpoint-down(xsm) {
+		font-size: $font-size__default-md;
+	}
+}
+
+.content__list {
+	@extend .mb-3;
+	
+	&.content__list_decimal {
+		counter-reset: counter;
+	}
+}
+
+.content__list-item {
+	@extend .mb-4;
+	@extend .mb-sm-3;
+	@extend .pos-rel;
+	@extend .content__text;
+
+	&:before {
+		@extend .d-inline-block;
+		@extend .align-top;
+		@extend .bg-colored;
+		@extend .bg-colored.bg-successed;
+	}
+
+	&.content__list-item_regular {
+		@extend .pl-4;
+
+		&:before {
+			@extend .no-c;
+			@extend .rounded-circle;
+			@include size(10px,10px);
+			@include pos-lt(0,8px);
+		}
+	}
+
+	&.content__list-item_decimal {
+		min-height: 30px;
+		padding: 0 0 0 35px;
+		
+		&:before {
+			@extend .mr-1;
+			@extend .text-center;
+			@extend .font-weight-bold;
+			@include pos-base;
+			@include size(30px,30px);
+			@include fs-lh($font-size__md,30px);
+			content: counter(counter)'.';
+			counter-increment: counter;
+	
+			@include media-breakpoint-up(sm) {
+				margin: -5px 0 0;
+			}
+
+			@include media-breakpoint-down(xsm) {
+				margin: -10px 0 0;
+			}
+		}
+	}
+
+	@include media-breakpoint-down(xsm) {
+		font-size: $font-size__sm;
+	}
+}

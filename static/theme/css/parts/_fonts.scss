@@ -1,0 +1,17 @@
+@font-face {
+	font-family: 'AvenirNextCyrBold';
+	src: url('../fonts/avenirnextcyr/bold/AvenirNextCyr-Bold.eot');
+	src: url('../fonts/avenirnextcyr/bold/AvenirNextCyr-Bold.eot?iefix') format('eot'),
+		url('../fonts/avenirnextcyr/bold/AvenirNextCyr-Bold.woff') format('woff'),
+		url('../fonts/avenirnextcyr/bold/AvenirNextCyr-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.font-normal {
+	font-family: $font-family__default;
+}
+
+.font-bold {
+	font-family: 'AvenirNextCyrBold', Arial, sans-serif;
+}

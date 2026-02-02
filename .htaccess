@@ -1,0 +1,73 @@
+RemoveHandler .html .htm
+AddType application/x-httpd-php .php .htm .html .phtml
+AddDefaultCharset utf-8
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+</IfModule>
+
+<IfModule mod_expires.c>
+	ExpiresActive On
+	ExpiresDefault "access 1 month"
+
+	<FilesMatch \.(html|xhtml|xml|shtml|phtml|php|txt)$>
+		ExpiresDefault "access plus 7 day"
+	</FilesMatch>
+
+	<FilesMatch \.(gif|png|jpg|jpeg|ico|swf)$>
+		ExpiresDefault "access plus 1 year"
+	</FilesMatch>
+	ExpiresByType image/gif "access plus 1 year"
+	ExpiresByType image/png "access plus 1 year"
+	ExpiresByType image/jpg "access plus 1 year"
+	ExpiresByType image/jpeg "access plus 1 year"
+	ExpiresByType image/x-icon "access 1 year"
+	
+	<FilesMatch \.(css|js)$>
+		ExpiresDefault "access plus 1 year"
+	</FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+	Header unset ETag
+	FileETag None
+	
+	<filesMatch "\.(gif|png|jpg|jpeg|ico|swf)$">
+		Header set Cache-Control "max-age=2592000, public"
+	</filesMatch>
+	<filesMatch "\.(css|js)$">
+		Header set Cache-Control "max-age=2592000, public"
+	</filesMatch>
+	<filesMatch "\.(html|htm|php)$">
+		Header set Cache-Control "max-age=604800, private, must-revalidate"
+	</filesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+	<IfModule mod_setenvif.c>
+		<IfModule mod_headers.c>
+			SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s*,?\s*)+|[X~-]{4,13}$ HAVE_Accept-Encoding
+			RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+		</IfModule>
+	</IfModule>
+	
+	<IfModule mod_filter.c>
+		AddOutputFilterByType DEFLATE text/html text/plain text/css \
+		application/json text/javascript application/javascript application/x-javascript text/x-js text/ecmascript application/ecmascript text/vbscript text/fluffscript \
+		text/xml application/xml text/x-component \
+		application/xhtml+xml application/rss+xml application/atom+xml \
+		image/x-icon image/svg+xml application/vnd.ms-fontobject application/x-font-ttf font/opentype
+	</IfModule>
+</IfModule>
+
+
+        

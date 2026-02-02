@@ -1,0 +1,253 @@
+.form {
+}
+
+.form__title {
+	color: #2d4e8a;
+	font-weight: 300;
+	letter-spacing: 0.05em;
+	
+	@include media-breakpoint-up(sm) {
+		margin: 0 0 22px;
+	}
+	
+	@include media-breakpoint-down(xsm) {
+		margin: 0 0 12px;
+	}
+}
+
+.form__item {
+	@extend .pos-rel;
+	
+	&.active {
+		.form__item-title {
+			@extend .d-none;
+		}
+	}
+	
+	&.form__item_error {
+		.form__item-error {
+			@extend .d-block;
+		}
+		
+		.form__item-field {
+			border-color: #ee3124;
+		}
+	}
+	
+	&.form__item_icon {
+		&:before {
+			@extend .no-c;
+			@extend .pos-abs;
+			@include offset(-10px 0 0,20px 0 0 20px);
+			top: 50%;
+			background-repeat: no-repeat;
+			background-color: rgba(0,0,0,0);
+			background-position: center center;
+		}
+	}
+	
+	&.form__item_icon-multiply {
+		&:before {
+			right: -26px;
+			background-image: url(../img/icons/icon-multiply.svg);
+		}
+	}
+	
+	&.form__item_icon-eq {
+		&:before {
+			background-image: url(../img/icons/icon-eq.svg);
+
+			@include media-breakpoint-up(md) {
+				left: -26px;
+			}
+
+			@include media-breakpoint-down(sm) {
+				left: -3px;
+			}
+		}
+	}
+}
+
+.form__item-field {
+	@extend .text-center;
+	@include size(100%,40px);
+	color: #2d4e8a;	
+	font-size: 16px;
+	font-weight: 300;
+	line-height: 25px;
+	letter-spacing: 0.05em;
+	padding: 5px 10px;
+	background: $white;
+	border-radius: 7px;
+	border: 1px solid rgba(0,0,0,0);
+	box-shadow: 1px 1px 4px rgba(0,0,0,0.15);
+	
+	&.form__item-field_sm {
+		height: 30px;
+		
+		& + .form__item-title {
+			top: -2px;
+			font-size: $font-size__sm;
+		}
+	}
+
+	&.form__item-field_inverted {
+		box-shadow: 1px 1px 4px rgba(0,0,0,0.15) inset;
+	}
+	
+	&.form__item-field_textarea {
+		min-height: 165px;
+		resize: none;
+	}
+}
+
+.form__item-title {
+	@extend .mb-0;
+	@include pos-base;
+	right: 0;
+	bottom: 0;
+	padding: 5px 10px;
+	color: #2d4e8a;
+	font-weight: 300;
+	line-height: 25px;
+	letter-spacing: 0.05em;
+	pointer-events: none;
+}
+
+.form__item-error {
+	@extend .d-none;
+	@include pos-lt(0,-17px);
+	right: 0;
+	font-size: $font-size__xs;
+	color: #ee3124;
+}
+
+.form__item-select {
+	@extend .cursor-pointer;
+	@include size(100%,45px);
+	@include pos-base;
+	z-index: 2;
+	opacity: 0;
+	outline: none !important;
+	
+	@include media-breakpoint-up(sm) {
+		display: none;
+	}
+	
+	&:active,
+	&:hover,
+	&:focus {
+		@extend .form__item-select;
+	}
+}
+	
+.form__item-option {
+	opacity: 0;
+}
+
+.form__footer-link {
+	@extend .dec-underline;
+	letter-spacing: 0.05em;
+	font-size: $font-size__xs;
+	color: #f8961d;
+	text-decoration: underline;
+
+	&:hover,
+	&:focus {
+		@extend .form__footer-link;
+	}
+}
+
+.fs-dropdown-item_placeholder {
+	opacity: 0;
+	
+	&.fs-dropdown-item {
+		opacity: 1;
+	}
+}
+
+.fs-dropdown {
+	@extend .pos-rel;
+	outline: none !important;
+	
+	&.fs-dropdown-open {
+		.fs-dropdown-options {
+			@extend .d-block;
+		}
+		
+		.fs-dropdown-selected {
+			border-radius: 3px 0 0 3px;
+
+			&:before {
+				-o-transform: rotateX(180deg);
+				-moz-transform: rotateX(180deg);
+				-webkit-transform: rotateX(180deg);
+				transform: rotateX(180deg);
+			}
+		}
+	}
+}
+
+.fs-dropdown-selected {
+	@extend .pos-rel;
+	@extend .text-left;
+	@extend .cursor-pointer;
+	@extend .form__item-field;
+	padding-right: 45px;
+	outline: none !important;
+	
+	&:before,
+	&:after {
+		@extend .no-c;
+		@extend .pos-abs;
+	}
+	
+	&:after {
+		top: 6px;
+		right: 35px;
+		bottom: 6px;
+		width: 1px;
+		background: #e5e5e5;
+	}
+	
+	&:before {
+		@include offset(-5px 0 0,11px 0 0 18px);
+		top: 50%;
+		right: 10px;
+		background: url(../img/icons/icon-arrow-down.svg) no-repeat scroll 0 0 rgba(0,0,0,0);
+		background-size: 100% auto;
+	}
+	
+	&:active,
+	&:hover,
+	&:focus {
+		@extend .fs-dropdown-selected;
+	}
+}
+
+.fs-dropdown-options {
+	@extend .d-none;
+	@extend .overflow-hidden;
+	@extend .pos-abs;
+	left: 0;
+	right: 0;
+	z-index: 2;
+	border-radius: 0 3px 3px 0;
+}
+
+.fs-dropdown-item {
+	@extend .d-block;
+	@extend .border-0;
+	@extend .text-left;
+	@extend .cursor-pointer;
+	@include border(0 0 1px,solid,#f3f4f1);
+	width: 100%;
+	font-weight: 300;
+	padding: 12px 15px;
+	background: $white;
+
+	&:hover,
+	&.fs-dropdown-item_selected {
+		background: $btn-color__default;
+	}
+}

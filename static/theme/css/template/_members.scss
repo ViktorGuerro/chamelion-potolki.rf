@@ -1,0 +1,49 @@
+.member {
+	@extend .pos-rel;
+	@extend .text-center;
+	color: #173458;
+	z-index: 1;
+	
+	@include media-breakpoint-up(sm) {
+		padding-top: 146px;
+		
+		&:hover {
+			z-index: 2;
+
+			.member__picture {
+				@include size(156px,156px);
+				top: -13px;
+				margin: 0 0 0 -78px;
+			}
+		}
+	}
+}
+
+.member__picture {
+	@extend .mb-4;
+	@extend .mb-sm-0;
+	
+	@include media-breakpoint-up(sm) {
+		@include transition(all 0.3s ease 0s);
+		@include size(126px,126px);
+		position: absolute;
+		left: 50%;
+		top: 0;
+		margin: 0 0 0 -63px;
+	}
+}
+
+.member__title {
+	@extend .mb-2;
+	@extend .font-weight-bold;
+	line-height: $line-height__content;
+	letter-spacing: 0.05em;
+	color: #173458;
+}
+
+.member__subtitle {
+	font-size: $font-size__sm;
+	font-weight: 300;
+	letter-spacing: 0.05em;
+	color: #173458;
+}
