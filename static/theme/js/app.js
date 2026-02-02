@@ -68,19 +68,23 @@ $(document).ready(function(){
 		}
 
 		
-		$.ajax({
-			url: 'post.php',
-			type: 'post',
-			dataType: 'json',
-			data: formData,
-			processData: false,
-			contentType: false,
-			success: function(data){
-				console.log(data.result);
-				if (data.result == 'success') {
-					$(form)[0].reset();
-					$(form).find('.form__item').removeClass('active');
-					$(form).find('.required').parent().removeClass('form__item_error');
+			$.ajax({
+				url: 'post.php',
+				type: 'post',
+				dataType: 'json',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(data){
+					if (!data || !data.result) {
+						captchaError.text('Произошла ошибка, попробуйте ещё раз').show();
+						return false;
+					}
+					console.log(data.result);
+					if (data.result == 'success') {
+						$(form)[0].reset();
+						$(form).find('.form__item').removeClass('active');
+						$(form).find('.required').parent().removeClass('form__item_error');
 
 					$(form).find('.show-message').trigger('click');
 					$('#modal-success').removeClass('modal_error').addClass('modal_success');
@@ -102,12 +106,35 @@ $(document).ready(function(){
 						} else {
 							$(input__required).parent().removeClass('form__item_error');
 						}
-					});
+						});
+						return false;
+					}
+				},
+				error: function(xhr){
+					var message = '';
+					if (xhr.responseJSON && xhr.responseJSON.message) {
+						message = xhr.responseJSON.message;
+					} else if (xhr.responseText) {
+						try {
+							var parsed = JSON.parse(xhr.responseText);
+							message = parsed && parsed.message ? parsed.message : '';
+						} catch (e) {
+							message = '';
+						}
+					}
+
+					if (xhr.status === 403 || (message && message.toLowerCase().indexOf('captcha') !== -1)) {
+						captchaContainer.addClass('error');
+						captchaContainer.css('outline', '2px solid #f44336');
+						captchaError.text('Капча не пройдена, попробуйте ещё раз').show();
+						return false;
+					}
+
+					captchaError.text('Произошла ошибка, попробуйте ещё раз').show();
 					return false;
 				}
-			}
+			});
 		});
-	});
 	
 	/* labels */
 	[].slice.call( document.querySelectorAll('.form__item-field')).forEach(function(inputEl) {
