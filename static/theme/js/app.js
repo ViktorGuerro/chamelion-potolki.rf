@@ -50,20 +50,11 @@ $(document).ready(function(){
 	$('#main__form').submit(function(e) {
 		e.preventDefault();
 		var form = $(this);
-		var main__form_block = $('[name="main__form_block"]',this).val();
-		var main__form_btn = $('[name="main__form_btn"]',this).val();
-		var main__form_name = $('[name="main__form_name"]',this).val();
-		var main__form_phone = $('[name="main__form_phone"]',this).val();
-
-		var main__form_width = $('[name="main__form_width"]',this).val();
-		var main__form_length = $('[name="main__form_length"]',this).val();
-		var main__form_square = $('[name="main__form_square"]',this).val();
-		var main__form_type = $('[name="main__form_type"]',this).val();
-		var main__form_angles = $('[name="main__form_angles"]',this).val();
-		var main__form_lamps = $('[name="main__form_lamps"]',this).val();
+		var formElement = form[0];
+		var formData = new FormData(formElement);
 		var captchaContainer = $('#captcha-container', this);
 		var captchaError = $('.captcha-error', this);
-		var captchaToken = form[0].querySelector('input[name="smart-token"]') ? form[0].querySelector('input[name="smart-token"]').value : '';
+		var captchaToken = formData.get('smart-token') ? String(formData.get('smart-token')).trim() : '';
 
 		captchaContainer.removeClass('error');
 		captchaContainer.css('outline', '');
@@ -81,19 +72,9 @@ $(document).ready(function(){
 			url: 'post.php',
 			type: 'post',
 			dataType: 'json',
-			data: { 
-				'main__form_block':   main__form_block,
-				'main__form_btn':   main__form_btn,
-				'main__form_name': main__form_name,
-				'main__form_phone': main__form_phone,
-				'main__form_width':   main__form_width,
-				'main__form_length':   main__form_length,
-				'main__form_square': main__form_square,
-				'main__form_type': main__form_type,
-				'main__form_angles': main__form_angles,
-				'main__form_lamps': main__form_lamps,
-				'smart-token': captchaToken
-			},
+			data: formData,
+			processData: false,
+			contentType: false,
 			success: function(data){
 				console.log(data.result);
 				if (data.result == 'success') {
