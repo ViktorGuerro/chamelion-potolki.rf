@@ -9,6 +9,33 @@
     $response = '';
     $errors = array();
 
+    $captchaToken = isset($_POST['smart-token']) ? trim($_POST['smart-token']) : '';
+    $captchaSecret = getenv('SMARTCAPTCHA_SECRET');
+    if ($captchaSecret === false) {
+        $configPath = __DIR__ . '/config.php';
+        if (file_exists($configPath)) {
+            $config = include $configPath;
+            if (is_array($config) && isset($config['SMARTCAPTCHA_SECRET'])) {
+                $captchaSecret = $config['SMARTCAPTCHA_SECRET'];
+            }
+        }
+    }
+    $failOpen = filter_var(getenv('SMARTCAPTCHA_FAIL_OPEN'), FILTER_VALIDATE_BOOLEAN);
+
+    if ($captchaToken === '') {
+        $errors[] = 'Captcha failed';
+    }
+    if (empty($captchaSecret)) {
+        $errors[] = 'Captcha configuration error';
+    }
+
+    if (empty($errors)) {
+        $captchaResult = validate_smartcaptcha($captchaToken, $captchaSecret, $_SERVER['REMOTE_ADDR'], $failOpen);
+        if (!$captchaResult['ok']) {
+            $errors[] = $captchaResult['message'];
+        }
+    }
+
 	if($_POST['main__form_name'] == '')   $errors[] = 'Поле необходимо заполнить';
 	if($_POST['main__form_phone'] == '')   $errors[] = 'Поле необходимо заполнить';
  
@@ -44,8 +71,13 @@
 		*/
     }
  
+    if ($response === 'error' && in_array('Captcha failed', $errors, true)) {
+        http_response_code(403);
+    }
+
     echo json_encode(array(
-        'result' => $response
+        'result' => $response,
+        'message' => empty($errors) ? '' : $errors[0]
     ));
 
     function send_mail($message){
@@ -73,6 +105,51 @@
         $mail->msgHTML($message);
         // Отправляем
         $mail->send();
+    }
+
+    function validate_smartcaptcha($token, $secret, $ip, $failOpen) {
+        $url = 'https://smartcaptcha.cloud.yandex.ru/validate';
+        $postData = http_build_query(array(
+            'secret' => $secret,
+            'token' => $token,
+            'ip' => $ip
+        ));
+
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+
+        $rawResponse = curl_exec($ch);
+        $curlError = curl_error($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+
+        if ($rawResponse === false || $httpCode !== 200) {
+            if ($failOpen) {
+                return array('ok' => true, 'message' => '');
+            }
+            return array(
+                'ok' => false,
+                'message' => 'Captcha service unavailable' . ($curlError ? ': ' . $curlError : '')
+            );
+        }
+
+        $data = json_decode($rawResponse, true);
+        if (!is_array($data) || !isset($data['status'])) {
+            if ($failOpen) {
+                return array('ok' => true, 'message' => '');
+            }
+            return array('ok' => false, 'message' => 'Captcha response invalid');
+        }
+
+        if ($data['status'] !== 'ok') {
+            return array('ok' => false, 'message' => 'Captcha failed');
+        }
+
+        return array('ok' => true, 'message' => '');
     }
 
 ?>

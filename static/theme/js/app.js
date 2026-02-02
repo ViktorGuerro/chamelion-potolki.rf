@@ -61,6 +61,20 @@ $(document).ready(function(){
 		var main__form_type = $('[name="main__form_type"]',this).val();
 		var main__form_angles = $('[name="main__form_angles"]',this).val();
 		var main__form_lamps = $('[name="main__form_lamps"]',this).val();
+		var captchaContainer = $('#captcha-container', this);
+		var captchaError = $('.captcha-error', this);
+		var captchaToken = form[0].querySelector('input[name="smart-token"]') ? form[0].querySelector('input[name="smart-token"]').value : '';
+
+		captchaContainer.removeClass('error');
+		captchaContainer.css('outline', '');
+		captchaError.hide();
+
+		if (!captchaToken) {
+			captchaContainer.addClass('error');
+			captchaContainer.css('outline', '2px solid #f44336');
+			captchaError.text('Подтвердите, что вы не робот').show();
+			return false;
+		}
 
 		
 		$.ajax({
@@ -77,7 +91,8 @@ $(document).ready(function(){
 				'main__form_square': main__form_square,
 				'main__form_type': main__form_type,
 				'main__form_angles': main__form_angles,
-				'main__form_lamps': main__form_lamps
+				'main__form_lamps': main__form_lamps,
+				'smart-token': captchaToken
 			},
 			success: function(data){
 				console.log(data.result);
@@ -92,6 +107,12 @@ $(document).ready(function(){
                    console.log("Форма отправлена", zakaz)
 				}
 				if (data.result == 'error') {
+					if (data.message && data.message.toLowerCase().indexOf('captcha') !== -1) {
+						captchaContainer.addClass('error');
+						captchaContainer.css('outline', '2px solid #f44336');
+						captchaError.text('Капча не пройдена, попробуйте ещё раз').show();
+						return false;
+					}
 					$(form).find('.required').each(function() {
 						var input__required = $(this);
 						
