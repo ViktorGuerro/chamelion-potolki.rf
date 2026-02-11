@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="ab51ca24-7540-471c-b6a8-9299c87eef3c" name="хамелеон-потолки.рф" url="http://хамелеон-потолки.рф">
+        <fileTransfer rootFolder="/web/sites/hamelion.rf/www" host="192.168.10.245" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

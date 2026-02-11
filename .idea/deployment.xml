@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="hamelion.rf">
+  <component name="PublishConfigData" autoUpload="Always" serverName="хамелеон-потолки.рф" showNewOnSourceInSync="false">
     <serverData>
-      <paths name="chameleon-potolki.ru">
+      <paths name="тихиестены-ростов.рф">
         <serverdata>
           <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
-      <paths name="hamelion.rf">
+      <paths name="хамелеон-потолки.рф">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
