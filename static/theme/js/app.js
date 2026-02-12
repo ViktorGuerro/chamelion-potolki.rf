@@ -50,41 +50,41 @@ $(document).ready(function(){
 	$('#main__form').submit(function(e) {
 		e.preventDefault();
 		var form = $(this);
-		var main__form_block = $('[name="main__form_block"]',this).val();
-		var main__form_btn = $('[name="main__form_btn"]',this).val();
-		var main__form_name = $('[name="main__form_name"]',this).val();
-		var main__form_phone = $('[name="main__form_phone"]',this).val();
+		var formElement = form[0];
+		var formData = new FormData(formElement);
+		var captchaContainer = $('#captcha-container', this);
+		var captchaError = $('.captcha-error', this);
+		var captchaToken = formData.get('smart-token') ? String(formData.get('smart-token')).trim() : '';
 
-		var main__form_width = $('[name="main__form_width"]',this).val();
-		var main__form_length = $('[name="main__form_length"]',this).val();
-		var main__form_square = $('[name="main__form_square"]',this).val();
-		var main__form_type = $('[name="main__form_type"]',this).val();
-		var main__form_angles = $('[name="main__form_angles"]',this).val();
-		var main__form_lamps = $('[name="main__form_lamps"]',this).val();
+		captchaContainer.removeClass('error');
+		captchaContainer.css('outline', '');
+		captchaError.hide();
+
+		if (!captchaToken) {
+			captchaContainer.addClass('error');
+			captchaContainer.css('outline', '2px solid #f44336');
+			captchaError.text('Подтвердите, что вы не робот').show();
+			return false;
+		}
 
 		
-		$.ajax({
-			url: 'post.php',
-			type: 'post',
-			dataType: 'json',
-			data: { 
-				'main__form_block':   main__form_block,
-				'main__form_btn':   main__form_btn,
-				'main__form_name': main__form_name,
-				'main__form_phone': main__form_phone,
-				'main__form_width':   main__form_width,
-				'main__form_length':   main__form_length,
-				'main__form_square': main__form_square,
-				'main__form_type': main__form_type,
-				'main__form_angles': main__form_angles,
-				'main__form_lamps': main__form_lamps
-			},
-			success: function(data){
-				console.log(data.result);
-				if (data.result == 'success') {
-					$(form)[0].reset();
-					$(form).find('.form__item').removeClass('active');
-					$(form).find('.required').parent().removeClass('form__item_error');
+			$.ajax({
+				url: 'post.php',
+				type: 'post',
+				dataType: 'json',
+				data: formData,
+				processData: false,
+				contentType: false,
+				success: function(data){
+					if (!data || !data.result) {
+						captchaError.text('Произошла ошибка, попробуйте ещё раз').show();
+						return false;
+					}
+					console.log(data.result);
+					if (data.result == 'success') {
+						$(form)[0].reset();
+						$(form).find('.form__item').removeClass('active');
+						$(form).find('.required').parent().removeClass('form__item_error');
 
 					$(form).find('.show-message').trigger('click');
 					$('#modal-success').removeClass('modal_error').addClass('modal_success');
@@ -92,6 +92,12 @@ $(document).ready(function(){
                    console.log("Форма отправлена", zakaz)
 				}
 				if (data.result == 'error') {
+					if (data.message && data.message.toLowerCase().indexOf('captcha') !== -1) {
+						captchaContainer.addClass('error');
+						captchaContainer.css('outline', '2px solid #f44336');
+						captchaError.text('Капча не пройдена, попробуйте ещё раз').show();
+						return false;
+					}
 					$(form).find('.required').each(function() {
 						var input__required = $(this);
 						
@@ -100,12 +106,35 @@ $(document).ready(function(){
 						} else {
 							$(input__required).parent().removeClass('form__item_error');
 						}
-					});
+						});
+						return false;
+					}
+				},
+				error: function(xhr){
+					var message = '';
+					if (xhr.responseJSON && xhr.responseJSON.message) {
+						message = xhr.responseJSON.message;
+					} else if (xhr.responseText) {
+						try {
+							var parsed = JSON.parse(xhr.responseText);
+							message = parsed && parsed.message ? parsed.message : '';
+						} catch (e) {
+							message = '';
+						}
+					}
+
+					if (xhr.status === 403 || (message && message.toLowerCase().indexOf('captcha') !== -1)) {
+						captchaContainer.addClass('error');
+						captchaContainer.css('outline', '2px solid #f44336');
+						captchaError.text('Капча не пройдена, попробуйте ещё раз').show();
+						return false;
+					}
+
+					captchaError.text('Произошла ошибка, попробуйте ещё раз').show();
 					return false;
 				}
-			}
+			});
 		});
-	});
 	
 	/* labels */
 	[].slice.call( document.querySelectorAll('.form__item-field')).forEach(function(inputEl) {
